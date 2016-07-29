@@ -4,6 +4,7 @@
 ///   Date: 24/07/2016
 ///</remarks>
 /// <summary>
+/// Convert a byte array multiple of 3 on Base64 encode
 /// Convertir un Array de bytes qui sera un multiple de 3 en Base64
 /// </summary>
 using System;
