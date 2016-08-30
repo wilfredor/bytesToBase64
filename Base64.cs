@@ -1,6 +1,12 @@
+///<remarks>
+///   Class:          Base64
+///   Author:         Wilfredo Rodríguez (wilfredor@gmail.com)          
+///   Date: 24/07/2016
+///</remarks>
+/// <summary>
+/// This algorithm covert a byte array multiple of 3 on a Base64
+/// </summary>
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 public static class Base64
 {
