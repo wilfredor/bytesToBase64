@@ -1,12 +1,6 @@
-///<remarks>
-///   Class:          Base64
-///   Author:         Wilfredo Rodríguez (wilfredor@gmail.com)          
-///   Date: 24/07/2016
-///</remarks>
-/// <summary>
-/// This algorithm covert a byte array multiple of 3 on a Base64
-/// </summary>
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public static class Base64
 {
@@ -14,25 +8,26 @@ public static class Base64
     /// Get char from array
     /// </summary>
     /// <param name="flag">array flag</param>
-    private static char getBase(bool[] flag)
+    private static char GetBase(bool[] flag)
     {
         char[] alphabet = new char[64] {
             'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
             'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
             '0','1','2','3','4','5','6','7','8','9','/','+'
         };
-            
-        return alphabet[bitArrayToInt(flag)];
+
+        return alphabet[BitArrayToInt(flag)];
     }
     /// <summary>
     /// Convert array of bit to int.
     /// </summary>
     /// <param name="bitArray">Array of bits</param>
-    private static int bitArrayToInt(bool[] bitArray)
+    private static int BitArrayToInt(bool[] bitArray)
     {
         int val = 0;
         Array.Reverse(bitArray);
-        for (int i = 0; i < bitArray.Length; ++i)
+
+        for (var i = 0; i < bitArray.Length; ++i)
             if (bitArray[i]) val |= 1 << i;
         return val;
     }
@@ -69,29 +64,26 @@ public static class Base64
         return b;
     }
 
-    private static String BinaryToBase64(bool[][] outputArray) {
-
+    private static string BinaryToBase64(IList<bool[]> outputArray)
+    {
         char[] cArray = new char[4];
-           
         for (int i = 0; i < 4; ++i)
-            cArray[i] = getBase(outputArray[i]);
-
+            cArray[i] = GetBase(outputArray[i]);
         return new string(cArray);
     }
 
-    public static String Encode(byte[] source)
+    public static string Encode(byte[] source)
     {
-        bool[] sourceArray = new bool[24];
-        bool[][] outputArray = new bool[4][];
+        var outputArray = new bool[4][];
 
-        int group; int bit;
-        String result = "";
+        string result = "";
 
         for (int n = 0; n <= source.Length - 3; n += 3)
         {
-            sourceArray = ByteArrayToBoolArray(new byte[3] { source[n], source[n + 1], source[n + 2] });
+            var sourceArray = ByteArrayToBoolArray(new byte[3] { source[n], source[n + 1], source[n + 2] });
 
-            group = 0; bit = 0;
+            var group = 0;
+            int bit = 0;
 
             while (group < 4) // 4 groups
             {
